@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🧑‍💼 User Management System
 
-## Getting Started
+A full-stack **User & Role Based Admin Panel** built with **Next.js, Prisma, JWT Authentication, Role & Permission System, Reports Logging, Blog Management, Category & Product Management**, and optimized **Pagination + Search + Date Filters**.
 
-First, run the development server:
+This system is built for enterprise-level role management, activity tracking, multi-auth workflows, and modular admin operations.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 🔒 Authentication & Authorization
+- Email/Password login  
+- JWT access token  
+- Email verification  
+- Protected API routes  
+- Role-based UI rendering  
+- Dynamic sidebar based on user role  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧑‍🏫 User Management
+- Create users  
+- Edit users  
+- Delete users  
+- Send login credentials via email (NodeMailer)  
+- Server-side pagination  
+- Search across users  
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔐 Roles & Permissions
+- Create roles (Admin, User, Custom)  
+- Attach permissions (READ / CREATE / UPDATE / DELETE)  
+- Dynamic permission-based UI  
+- Backend permission middleware  
+- Fully reusable permission checking system  
+- Prisma-based **RolePermission** model  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📝 Reports Module
+Every action performed by any user is logged:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- CREATE / UPDATE / DELETE / LOGIN actions  
+- Stored in the database  
+- Visible only to Admin or users with permission  
+- Delete report (Admin only)  
+- Search by description & entity  
+- **Date filters:**
+  - Today  
+  - Last 7 days  
+  - This month  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## ✍️ Blog Management
+- Users can create/update/delete **only their blogs**  
+- Pagination  
+- Search  
+- User-specific views  
+
+---
+
+## ⚙️ Technology Stack
+
+### **Frontend**
+- Next.js  
+- React  
+- Tailwind CSS  
+
+### **Backend**
+- Next.js API Routes  
+- Prisma ORM  
+
+### **Database**
+- MySQL  
+
+### **Auth**
+- JWT  
+- Bcrypt  
+- Custom Middleware  
+
+### **Email**
+- NodeMailer  
+
+### **UI Libraries**
+- Lucide Icons  
