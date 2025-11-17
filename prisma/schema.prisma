@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum ActionType {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+}
+
+
+model User {
+  id            Int              @id @default(autoincrement()) 
+  name          String
+  email         String           @unique
+  password      String
+  isFirstLogin  Boolean          @default(true)
+  roleId        Int?             
+  role          Role?            @relation(fields: [roleId], references: [id] ,onDelete: Cascade) 
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  blogs Blog[]
+  reports Report[]
+}
+
+
+model Role {
+  id           Int              @id @default(autoincrement())
+  name         String           @unique
+  users        User[]           
+  permissions  RolePermission[] 
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+}
+
+model Permission {
+  id           Int           @id @default(autoincrement())
+  name      String?        @unique      
+  description  String?
+  roles        RolePermission[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model Action {
+  id                Int              @id @default(autoincrement())
+  type              ActionType
+  rolePermissionId  Int
+  rolePermission    RolePermission   @relation(fields: [rolePermissionId], references: [id], onDelete: Cascade)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  @@unique([rolePermissionId, type])
+}
+model RolePermission {
+  id             Int          @id @default(autoincrement())
+  roleId         Int
+  permissionId   Int
+  role           Role         @relation(fields: [roleId], references: [id])
+  permission     Permission   @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  actions        Action[]    
+
+  @@unique([roleId, permissionId])
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Blog {
+  id          Int       @id @default(autoincrement())
+  title       String
+  content String @db.LongText
+
+  authorId    Int
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  status      BlogStatus @default(DRAFT)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+enum ReportType {
+  USER_ACTIVITY
+  SYSTEM_LOG
+  SALES
+  OTHER
+}
+
+model Report {
+  id               Int      @id @default(autoincrement())
+  actionType       String  
+  entityType       String  
+  entityId         Int?      
+  performedById    Int
+  performedBy      User  @relation(fields: [performedById], references: [id], onDelete: Cascade)
+  description      String    
+  date             DateTime  @default(now())
+}
+
