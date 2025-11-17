@@ -81,7 +81,7 @@ const page = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
-  const API_URL = "http://localhost:3000/api/auth/login";
+  const API_URL = "/api/auth/login";
 
   const handleLogin = async (e) => {
     e.preventDefault();
