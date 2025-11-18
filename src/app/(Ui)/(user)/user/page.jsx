@@ -86,7 +86,7 @@ const DashboardView = ({ themeClasses }) => {
           }
           console.log(perm);
           console.log(perm.name);
-          console.log(perm?.name?.length);
+          console.log(perm?.name?.length, "perm?.name?.length");
           console.log(endpoint, "endpoint");
           if (endpoint) {
             const res = await axios.get(endpoint);

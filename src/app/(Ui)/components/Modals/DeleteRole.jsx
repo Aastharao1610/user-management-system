@@ -30,7 +30,7 @@ export const DeleteRoleModal = ({ role, onClose, onSuccess }) => {
   if (!role) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/70 bg-opacity-50 z-50">
       <div className="bg-white rounded-xl shadow-lg p-6 w-96">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-gray-800">

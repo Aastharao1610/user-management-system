@@ -7,9 +7,9 @@ export async function DELETE(req) {
     const { user, error } = await verifyToken(req);
     if (error) return NextResponse.json({ error }, { status: 401 });
     console.log(user, "user data");
-    console.log(user.role.name);
+    console.log(user.role, "user.role.name");
 
-    if (user.role.name !== "Admin") {
+    if (user.role !== "Admin") {
       return NextResponse.json(
         { error: "Only Admins can delete reports" },
         { status: 403 }
@@ -17,11 +17,13 @@ export async function DELETE(req) {
     }
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
+    console.log(id, "ID");
 
     if (!id) {
       return NextResponse.json({ error: "Id is required" }, { status: 400 });
     }
     const reportId = parseInt(id);
+    console.log(reportId);
     const existingReport = await prisma.report.findUnique({
       where: { id: reportId },
     });
